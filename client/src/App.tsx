@@ -1,17 +1,23 @@
-import AddClientModal from "./components/Clients/AddClientModal";
-import Clients from "./components/Clients/Clients";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import Header from "./components/Header";
-import Projects from "./components/Projects/Projects";
+import Home from "./pages/Home";
+import NotFound from "./pages/NotFound";
+import Project from "./pages/Project";
 
 function App() {
   return (
     <>
       <Header />
-      <div className="container">
-        <AddClientModal />
-        <Projects />
-        <Clients />
-      </div>
+      <Router>
+        <div className="container">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/projects/:id" element={<Project />} />
+
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </div>
+      </Router>
     </>
   );
 }

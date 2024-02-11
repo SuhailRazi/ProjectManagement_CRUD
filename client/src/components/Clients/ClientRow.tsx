@@ -11,7 +11,7 @@ type ClientRowProps = {
 const ClientRow: React.FC<ClientRowProps> = ({ clients }) => {
   const [deleteClient] = useMutation(DELETE_CLIENT, {
     variables: { id: clients?.id as string },
-    refetchQueries: ["Clients"],
+    refetchQueries: ["Clients", "GetProjects"],
     // // More faster way by updating the cache
     // update(cache, { data }) {
     //   const deletedClientId = data?.deleteClient?.id;
