@@ -1,6 +1,7 @@
-import AddClientModal from "./components/AddClientModal";
-import Clients from "./components/Clients";
+import AddClientModal from "./components/Clients/AddClientModal";
+import Clients from "./components/Clients/Clients";
 import Header from "./components/Header";
+import Projects from "./components/Projects/Projects";
 
 function App() {
   return (
@@ -8,6 +9,7 @@ function App() {
       <Header />
       <div className="container">
         <AddClientModal />
+        <Projects />
         <Clients />
       </div>
     </>
