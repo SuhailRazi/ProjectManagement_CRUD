@@ -1,9 +1,8 @@
 import React from "react";
 import { FaTrash } from "react-icons/fa";
-import { Client, ClientsQuery } from "../Types/gql/graphql";
 import { useMutation } from "@apollo/client";
-import { DELETE_CLIENT } from "../GraphQl/Mutations/clientMutations";
-import { GETCLIENTS } from "../GraphQl/Queries/clientQueries";
+import { DELETE_CLIENT } from "../../GraphQl/Mutations/clientMutations";
+import { Client } from "../../Types/gql/graphql";
 
 type ClientRowProps = {
   clients: Client | null;
@@ -12,24 +11,24 @@ type ClientRowProps = {
 const ClientRow: React.FC<ClientRowProps> = ({ clients }) => {
   const [deleteClient] = useMutation(DELETE_CLIENT, {
     variables: { id: clients?.id as string },
-    // refetchQueries: [{ query: GETCLIENTS }],
-    // More faster way by updating the cache
-    update(cache, { data }) {
-      const deletedClientId = data?.deleteClient?.id;
-      if (deletedClientId) {
-        const cachedData = cache.readQuery<ClientsQuery>({ query: GETCLIENTS });
-        if (cachedData) {
-          cache.writeQuery<ClientsQuery>({
-            query: GETCLIENTS,
-            data: {
-              clients: cachedData?.clients?.filter(
-                (client) => client?.id !== deletedClientId
-              ),
-            },
-          });
-        }
-      }
-    },
+    refetchQueries: ["Clients"],
+    // // More faster way by updating the cache
+    // update(cache, { data }) {
+    //   const deletedClientId = data?.deleteClient?.id;
+    //   if (deletedClientId) {
+    //     const cachedData = cache.readQuery<ClientsQuery>({ query: GETCLIENTS });
+    //     if (cachedData) {
+    //       cache.writeQuery<ClientsQuery>({
+    //         query: GETCLIENTS,
+    //         data: {
+    //           clients: cachedData?.clients?.filter(
+    //             (client) => client?.id !== deletedClientId
+    //           ),
+    //         },
+    //       });
+    //     }
+    //   }
+    // },
 
     onCompleted: () => {
       console.log("Client deleted successfully");

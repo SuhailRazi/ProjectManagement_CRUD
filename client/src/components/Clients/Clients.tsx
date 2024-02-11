@@ -1,7 +1,7 @@
 import { useQuery } from "@apollo/client";
 import ClientRow from "./ClientRow";
-import { Spinner } from "./Spinner";
-import { GETCLIENTS } from "../GraphQl/Queries/clientQueries";
+import { Spinner } from "../Spinner";
+import { GETCLIENTS } from "../../GraphQl/Queries/clientQueries";
 // import { DELETE_CLIENT } from "../GraphQl/Mutations/clientMutations";
 
 const Clients = () => {
