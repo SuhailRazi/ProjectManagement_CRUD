@@ -2,16 +2,13 @@ import { useQuery } from "@apollo/client";
 import ClientRow from "./ClientRow";
 import { Spinner } from "./Spinner";
 import { GETCLIENTS } from "../GraphQl/Queries/clientQueries";
+// import { DELETE_CLIENT } from "../GraphQl/Mutations/clientMutations";
 
 const Clients = () => {
   const { data, loading, error } = useQuery(GETCLIENTS);
+
   if (loading) return <Spinner />;
   if (error) return <p>Something went wrong....</p>;
-  console.log(data);
-
-  const handleDeleteClient = (id: string) => {
-    console.log(id);
-  };
 
   return (
     <div>
@@ -28,11 +25,7 @@ const Clients = () => {
           <tbody>
             {data?.clients?.length != 0 ? (
               data?.clients?.map((client) => (
-                <ClientRow
-                  key={client?.id}
-                  clients={client}
-                  deleteFunction={handleDeleteClient}
-                />
+                <ClientRow key={client?.id} clients={client} />
               ))
             ) : (
               <tr>
