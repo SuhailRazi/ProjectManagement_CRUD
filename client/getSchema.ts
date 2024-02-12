@@ -4,7 +4,7 @@ import { getIntrospectionQuery, buildClientSchema } from "graphql";
 export const loader = async () => {
   const introspectionQuery = getIntrospectionQuery();
 
-  const response = await fetch("http://localhost:5000/graphql", {
+  const response = await fetch("https://api-prjtmngnt.vercel.app/graphql", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
