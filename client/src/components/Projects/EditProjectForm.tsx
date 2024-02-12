@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import * as yup from "yup";
-import { Project, ProjectStatus } from "../../Types/gql/graphql";
+import { Project, UpdateProjectStatus } from "../../Types/gql/graphql";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { UPDATE_PROJECT } from "../../GraphQl/Mutations/projectMutations";
@@ -18,8 +18,7 @@ const schema = yup.object().shape({
 });
 
 const EditProjectForm: React.FC<EditProjectProps> = ({ project }) => {
-  const [status, setStatus] = useState<ProjectStatus>();
-  console.log(status);
+  const [status, setStatus] = useState<UpdateProjectStatus>();
 
   const [updateProject] = useMutation(UPDATE_PROJECT, {
     refetchQueries: ["GetProjects"],
@@ -80,11 +79,11 @@ const EditProjectForm: React.FC<EditProjectProps> = ({ project }) => {
             id=""
             className="form-select"
             value={status}
-            onChange={(e) => setStatus(e.target.value as ProjectStatus)}
+            onChange={(e) => setStatus(e.target.value as UpdateProjectStatus)}
           >
-            <option value={ProjectStatus.New}>Not Started</option>
-            <option value={ProjectStatus.Progress}>In Progress</option>
-            <option value={ProjectStatus.Completed}>Completed</option>
+            <option value={UpdateProjectStatus.New}>Not Started</option>
+            <option value={UpdateProjectStatus.Progress}>In Progress</option>
+            <option value={UpdateProjectStatus.Completed}>Completed</option>
           </select>
           <button className="btn btn-primary mt-3" type="submit">
             Update Project
