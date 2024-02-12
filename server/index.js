@@ -8,6 +8,11 @@ const connectDB = require("./config/db.js");
 const PORT = process.env.PORT || 5000;
 const app = express();
 
+// Add a route handler for the root path
+app.get("/", (req, res) => {
+  res.send("Hello! Your GraphQL server is live.");
+});
+
 connectDB();
 app.use(cors());
 app.use(
