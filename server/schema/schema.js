@@ -1,4 +1,3 @@
-// const { projects, clients } = require("../sampleData.js"); since using mongodb database
 // Mongoose models
 const Project = require("../models/Project.js");
 const Client = require("../models/Client.js");
