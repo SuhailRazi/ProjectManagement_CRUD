@@ -13,27 +13,8 @@ app.get("/", (req, res) => {
   res.send("Hello! Your GraphQL server is live.");
 });
 
-// Configure CORS middleware based on environment
-let corsOptions = {};
-
-if (process.env.NODE_ENV === "development") {
-  corsOptions = {
-    origin: "http://localhost:5173", // Replace with your development frontend's URL
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    credentials: true, // enable set cookie
-  };
-} else if (process.env.NODE_ENV === "production") {
-  corsOptions = {
-    // Add your production frontend URL here
-    origin: "https://project-management-client-ten.vercel.app/",
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    credentials: true, // enable set cookie
-  };
-}
-
-app.use(cors(corsOptions));
-
 connectDB();
+app.use(cors());
 app.use(
   "/graphql",
   graphqlHTTP({
